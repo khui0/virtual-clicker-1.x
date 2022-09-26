@@ -1,8 +1,8 @@
 :root {
-    --text-color: #1a1a1a;
-    --background-color: #ffffff;
-    --surface-color: #e9e9e9;
-    --control-color: #c5c5c5;
+    --text-color: #ffffff;
+    --background-color: #32383f;
+    --surface-color: #444c56;
+    --control-color: #5e6977;
     --accent-color: #059fff;
     --error-color: #f84747;
 }
@@ -102,27 +102,20 @@ button:hover {
     height: 3em;
 }
 
-#feed {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow: auto;
-    border-radius: 8px;
+.input-container {
+    width: min(100%, 800px);
+    margin: 0 auto;
 }
 
-.card {
-    flex: 0 0 auto;
-    height: fit-content;
-    padding: 10px;
-    border-radius: 8px;
+.input-container>input,
+.input-container>textarea {
     background-color: var(--surface-color);
-    -webkit-user-select: text;
-    user-select: text;
 }
 
-.card>p {
-    max-height: 400px;
-    overflow: auto;
+#seat-code {
+    background-color: transparent;
+    font: 500 50px "Poppins", sans-serif;
+    text-align: center;
 }
 
 dialog {
@@ -161,15 +154,6 @@ dialog>.button-cluster {
 }
 
 /* Themes */
-
-.theme-periodically {
-    --text-color: #ffffff;
-    --background-color: #32383f;
-    --surface-color: #444c56;
-    --control-color: #5e6977;
-    --accent-color: #059fff;
-    --error-color: #f84747;
-}
 
 .theme-abyss {
     --text-color: #ffffff;

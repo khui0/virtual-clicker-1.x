@@ -7,9 +7,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clicker</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
+    <div class="header">
+        <h1>Clicker</h1>
+        <div class="button-cluster">
+            <button data-open="options">Options</button>
+            <button data-open="info">Info</button>
+        </div>
+    </div>
+    <div class="input-container">
+        <p>Question</p>
+        <input type="text">
+        <p>Answer</p>
+        <textarea name="" id="" rows="10"></textarea>
+        <button>Submit</button>
+    </div>
+    <!-- Dialogs -->
+    <dialog id="code">
+        <h2>Enter seat code</h2>
+        <input type="text" id="seat-code" placeholder="000" maxlength="3">
+        <p>period-column-row</p>
+        <div class="button-cluster">
+            <button data-close="code">Close</button>
+            <button id="save-code">Save</button>
+        </div>
+    </dialog>
+    <dialog id="options">
+        <h2>Options</h2>
+        <p>Seat code</p>
+        <button data-open="code">Change</button>
+        <p>Theme</p>
+        <button data-theme="">Classic</button>
+        <button data-theme="theme-abyss">Abyss</button>
+        <button data-theme="theme-glacier">Glacier</button>
+        <button data-theme="theme-sage">Sage</button>
+        <button data-theme="theme-manilla">Manilla</button>
+        <button data-theme="theme-rose">Rose</button>
+        <button data-theme="theme-lavender">Lavender</button>
+        <p>Storage</p>
+        <button id="reset-theme">Reset theme</button>
+        <button id="reset">Reset all</button>
+        <div class="button-cluster">
+            <button data-close="options">Close</button>
+        </div>
+    </dialog>
+    <dialog id="info">
+        <h2>Info</h2>
+        <p>A better way to click in answers in room 233</p>
+        <a href="https://github.com/khui0/lipsky-clicker" target="_blank">GitHub</a>
+        <div class="button-cluster">
+            <button data-close="info">Close</button>
+        </div>
+    </dialog>
+    <!-- Scripts -->
     <script src="main.js"></script>
 </body>
 
