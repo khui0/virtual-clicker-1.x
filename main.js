@@ -71,6 +71,12 @@ document.getElementById("save-code").addEventListener("click", () => {
     }
 });
 
+answerInput.addEventListener("keydown", e => {
+    if (e.ctrlKey && e.key == "Enter") {
+        document.getElementById("submit").click();
+    }
+});
+
 document.getElementById("submit").addEventListener("click", () => {
     let question = questionInput.value;
     let answer = answerInput.value;
