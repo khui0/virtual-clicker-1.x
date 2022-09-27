@@ -19,6 +19,7 @@
     <div class="header">
         <h1>Clicker</h1>
         <div class="button-cluster">
+            <button data-open="history">History</button>
             <button data-open="options">Options</button>
             <button data-open="info">Info</button>
         </div>
@@ -26,21 +27,55 @@
     <div class="dynamic-container">
         <h2>Submit click</h2>
         <p>Question</p>
-        <input type="text">
+        <input type="text" id="question">
         <p>Answer</p>
-        <textarea name="" id="" rows="10"></textarea>
-        <div class="button-cluster">
-            <button id="submit">Submit</button>
-        </div>
+        <textarea id="answer" rows="10"></textarea>
+        <button id="submit">Submit</button>
     </div>
     <!-- Dialogs -->
     <dialog id="code">
         <h2>Enter seat code</h2>
-        <input type="text" id="seat-code" placeholder="000" maxlength="3">
+        <input type="text" id="seat-code" placeholder="000" maxlength="3" autocomplete="off">
         <p>period-column-row</p>
         <div class="button-cluster">
             <button data-close="code">Close</button>
             <button id="save-code">Save</button>
+        </div>
+    </dialog>
+    <dialog id="history">
+        <h2>Click history</h2>
+        <div id="feed">
+            <div class="card">
+                <h3>1</h3>
+                <p>f(x) = sqrt(x^2)</p>
+                <div class="button-cluster">
+                    <button>Resubmit</button>
+                </div>
+            </div>
+            <div class="card">
+                <h3>1</h3>
+                <p>f(x) = sqrt(x^2)</p>
+                <div class="button-cluster">
+                    <button>Resubmit</button>
+                </div>
+            </div>
+            <div class="card">
+                <h3>1</h3>
+                <p>f(x) = sqrt(x^2)</p>
+                <div class="button-cluster">
+                    <button>Resubmit</button>
+                </div>
+            </div>
+            <div class="card">
+                <h3>1</h3>
+                <p>f(x) = sqrt(x^2)</p>
+                <div class="button-cluster">
+                    <button>Resubmit</button>
+                </div>
+            </div>
+        </div>
+        <div class="button-cluster">
+            <button data-close="history">Close</button>
         </div>
     </dialog>
     <dialog id="options">
@@ -56,7 +91,7 @@
         <button data-theme="theme-rose">Rose</button>
         <button data-theme="theme-lavender">Lavender</button>
         <p>Storage</p>
-        <button id="reset-recent">Reset recent clicks</button>
+        <button id="reset-history">Reset history</button>
         <button id="reset-theme">Reset theme</button>
         <button id="reset">Reset all</button>
         <div class="button-cluster">
@@ -72,7 +107,7 @@
         </div>
     </dialog>
     <!-- Scripts -->
-    <script src="main.js"></script>
+    <script src="main.js" type="module"></script>
 </body>
 
 </html>
