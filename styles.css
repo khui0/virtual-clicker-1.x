@@ -125,7 +125,7 @@ button:hover {
 
 [data-insert] {
     flex: 1;
-    min-width: 45px;
+    min-width: 2.8em;
 }
 
 #submit {
@@ -133,7 +133,7 @@ button:hover {
 }
 
 [data-choice] {
-    min-width: 45px;
+    min-width: 2.8em;
 }
 
 #seat-code {
