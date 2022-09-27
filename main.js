@@ -92,6 +92,14 @@ document.getElementById("submit").addEventListener("click", () => {
     }
 });
 
+// Math character buttons
+document.querySelectorAll("[data-insert]").forEach(button => {
+    button.addEventListener("click", () => {
+        answerInput.value += button.innerHTML;
+        answerInput.focus();
+    });
+});
+
 document.getElementById("reset-history").addEventListener("click", () => {
     localStorage.removeItem("clicker-history");
 });

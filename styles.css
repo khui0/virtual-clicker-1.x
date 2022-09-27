@@ -108,18 +108,32 @@ button:hover {
 }
 
 .dynamic-container {
+    display: flex;
+    flex-direction: column;
     width: min(100%, 800px);
     margin: 0 auto;
+}
+
+.dynamic-container>.button-cluster {
+    margin: 5px 0;
+}
+
+.dynamic-container>.button-cluster+.button-cluster {
+    margin: 0 0 5px 0;
+}
+
+[data-insert] {
+    flex: 1;
+}
+
+#submit {
+    flex: 1;
 }
 
 #seat-code {
     background-color: transparent;
     font: 500 50px "Poppins", sans-serif;
     text-align: center;
-}
-
-#submit {
-    width: 100%;
 }
 
 #feed {
@@ -137,7 +151,7 @@ button:hover {
 }
 
 #feed>div+div {
-    border-top: 3px solid var(--control-color);
+    border-top: 2px solid var(--control-color);
 }
 
 #feed>div>p {
