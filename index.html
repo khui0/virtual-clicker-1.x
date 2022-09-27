@@ -43,6 +43,11 @@
         </div>
         <div class="button-cluster">
             <button id="submit">Submit</button>
+            <button data-choice="a">A</button>
+            <button data-choice="b">B</button>
+            <button data-choice="c">C</button>
+            <button data-choice="d">D</button>
+            <button data-choice="e">E</button>
         </div>
     </div>
     <!-- Dialogs -->
@@ -53,6 +58,15 @@
         <div class="button-cluster">
             <button data-close="code">Close</button>
             <button id="save-code">Save</button>
+        </div>
+    </dialog>
+    <dialog id="choice">
+        <h2></h2>
+        <p>This is the same as submitting</p>
+        <ul></ul>
+        <div class="button-cluster">
+            <button data-close="choice">Close</button>
+            <button data-submit>Submit</button>
         </div>
     </dialog>
     <dialog id="history">

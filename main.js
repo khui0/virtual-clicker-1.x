@@ -9,6 +9,14 @@ var code = localStorage.getItem("clicker-code") || "";
 var history = JSON.parse(localStorage.getItem("clicker-history") || "[]");
 document.body.className = localStorage.getItem("clicker-theme") || "";
 
+const aliases = {
+    "a": ["Agree", "True", "Yes"],
+    "b": ["Disagree", "False", "No"],
+    "c": ["Both", "Always"],
+    "d": ["Neither", "Never"],
+    "e": ["Sometimes", "Cannot be determined"]
+}
+
 // Show enter code modal if no saved seat code is found
 if (!code) {
     document.getElementById("code").showModal()
@@ -71,10 +79,34 @@ document.getElementById("save-code").addEventListener("click", () => {
     }
 });
 
+// Keyboard shortcut to submit click
 answerInput.addEventListener("keydown", e => {
     if (e.ctrlKey && e.key == "Enter") {
         document.getElementById("submit").click();
     }
+});
+
+// Hides multiple choice buttons if answer isn't empty
+answerInput.addEventListener("input", () => {
+    if (answerInput.value != "") {
+        document.querySelectorAll("[data-choice]").forEach(button => {
+            button.style.display = "none";
+        });
+    }
+    else {
+        document.querySelectorAll("[data-choice]").forEach(button => {
+            button.style.display = "inline-block";
+        });
+    }
+});
+
+// Math character buttons
+document.querySelectorAll("[data-insert]").forEach(button => {
+    button.addEventListener("click", () => {
+        answerInput.value += button.innerHTML;
+        answerInput.dispatchEvent(new Event("input"));
+        answerInput.focus();
+    });
 });
 
 document.getElementById("submit").addEventListener("click", () => {
@@ -88,6 +120,7 @@ document.getElementById("submit").addEventListener("click", () => {
             storeClick(question, timestamp, answer);
             questionInput.value = "";
             answerInput.value = "";
+            answerInput.dispatchEvent(new Event("input"));
             questionInput.focus();
         }
         else {
@@ -99,12 +132,45 @@ document.getElementById("submit").addEventListener("click", () => {
     }
 });
 
-// Math character buttons
-document.querySelectorAll("[data-insert]").forEach(button => {
+document.querySelectorAll("[data-choice]").forEach(button => {
     button.addEventListener("click", () => {
-        answerInput.value += button.innerHTML;
-        answerInput.focus();
+        let choice = button.getAttribute("data-choice");
+        let modal = document.getElementById("choice");
+        let list = modal.querySelector("ul");
+        // Set title to show the selected choice
+        modal.querySelector("h2").textContent = `Do you want to submit choice ${choice.toUpperCase()}?`;
+        // Populate alias list according to the selected choice
+        list.innerHTML = "";
+        for (let i = 0; i < aliases[choice].length; i++) {
+            list.innerHTML += `<li>${aliases[choice][i]}</li>`;
+        }
+        document.querySelector("[data-submit]").setAttribute("data-submit", choice);
+        modal.showModal();
     });
+});
+
+// Submit multiple choice answer
+document.querySelector("[data-submit]").addEventListener("click", e => {
+    let question = questionInput.value;
+    let answer = `CHOICE ${e.target.getAttribute("data-submit").toUpperCase()}`;
+    console.log(answer);
+    if (code) {
+        if (question?.trim()) {
+            let timestamp = Date.now();
+            submitClick(code, question, answer);
+            appendClick(question, timestamp, answer);
+            storeClick(question, timestamp, answer);
+            questionInput.value = "";
+        }
+        else {
+            alert("Question can't be empty 🫠");
+        }
+        document.getElementById("choice").close();
+        questionInput.focus();
+    }
+    else {
+        document.getElementById("code").showModal();
+    }
 });
 
 document.getElementById("reset-history").addEventListener("click", () => {
@@ -165,9 +231,10 @@ function addResubmitEvents() {
         item.addEventListener("click", () => {
             let uuid = item.getAttribute("data-fill");
             let question = document.getElementById(uuid).querySelector("h3").textContent;
-            let answer = document.getElementById(uuid).querySelector("p").textContent;
+            let answer = document.getElementById(uuid).querySelectorAll("p")[1].textContent;
             questionInput.value = question;
             answerInput.value = answer;
+            answerInput.dispatchEvent(new Event("input"));
             document.getElementById("history").close();
         });
     });
