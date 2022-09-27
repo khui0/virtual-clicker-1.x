@@ -125,10 +125,15 @@ button:hover {
 
 [data-insert] {
     flex: 1;
+    min-width: 45px;
 }
 
 #submit {
     flex: 1;
+}
+
+[data-choice] {
+    min-width: 45px;
 }
 
 #seat-code {

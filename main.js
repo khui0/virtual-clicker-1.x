@@ -132,6 +132,7 @@ document.getElementById("submit").addEventListener("click", () => {
     }
 });
 
+// Show multiple choice preview
 document.querySelectorAll("[data-choice]").forEach(button => {
     button.addEventListener("click", () => {
         let choice = button.getAttribute("data-choice");
