@@ -1,2 +1,2 @@
-# lipsky clicker
+# Virtual Clicker
  
