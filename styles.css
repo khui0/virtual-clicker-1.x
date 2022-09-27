@@ -135,17 +135,17 @@ button:hover {
     overflow: auto;
 }
 
-.card {
+#feed>div {
     flex: 0 0 auto;
     height: fit-content;
     padding: 10px 0;
 }
 
-.card+.card {
+#feed>div+div {
     border-top: 3px solid var(--control-color);
 }
 
-.card>p {
+#feed>div>p {
     max-width: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;

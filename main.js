@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 const questionInput = document.getElementById("question");
 const answerInput = document.getElementById("answer");
 
+const feed = document.getElementById("feed");
+
 var code = localStorage.getItem("code") || "";
 var history = JSON.parse(localStorage.getItem("history") || "[]");
 document.body.className = localStorage.getItem("theme") || "";
@@ -10,6 +12,10 @@ document.body.className = localStorage.getItem("theme") || "";
 // Show enter code modal if no saved seat code is found
 if (!code) {
     document.getElementById("code").showModal()
+}
+
+for (let i = 0; i < history.length; i++) {
+    appendClick(history[i].question, history[i].answer);
 }
 
 document.querySelectorAll("[data-theme]").forEach(item => {
@@ -68,6 +74,8 @@ document.getElementById("submit").addEventListener("click", () => {
     if (code) {
         if (question?.trim() && answer?.trim()) {
             submitClick(999, question, answer);
+            appendClick(question, answer);
+            storeClick(question, answer);
             questionInput.value = "";
             answerInput.value = "";
         }
@@ -110,4 +118,38 @@ function submitClick(code, question, answer) {
             "Content-Type": "application/x-www-form-urlencoded"
         }
     });
+}
+
+function appendClick(question, answer) {
+    let uuid = uuidv4();
+    feed.innerHTML = `<div id="${uuid}">
+    <h3>${question}</h3>
+    <p>${answer}</p>
+    <div class="button-cluster">
+        <button data-fill="${uuid}">Resubmit</button>
+    </div>
+</div>` + feed.innerHTML
+    addResubmitEvents();
+}
+
+function addResubmitEvents() {
+    document.querySelectorAll("[data-fill]").forEach(item => {
+        item.addEventListener("click", () => {
+            let uuid = item.getAttribute("data-fill");
+            let question = document.getElementById(uuid).querySelector("h3").textContent;
+            let answer = document.getElementById(uuid).querySelector("p").textContent;
+            questionInput.value = question;
+            answerInput.value = answer;
+            document.getElementById("history").close();
+        });
+    });
+}
+
+function storeClick(question, answer) {
+    let item = {
+        "question": question,
+        "answer": answer
+    }
+    history.push(item);
+    localStorage.setItem("history", JSON.stringify(history));
 }
