@@ -123,6 +123,13 @@ document.getElementById("submit").addEventListener("click", () => {
             answerInput.dispatchEvent(new Event("input"));
             questionInput.focus();
         }
+        else if (answer?.trim()) {
+            let questionPrompt = prompt("Almost there! Enter a question 🙂");
+            if (questionPrompt) {
+                questionInput.value = questionPrompt;
+                document.getElementById("submit").click();
+            }
+        }
         else {
             alert("Question and answer can't be empty 😔");
         }
@@ -166,7 +173,11 @@ document.querySelector("[data-submit]").addEventListener("click", e => {
             questionInput.value = "";
         }
         else {
-            alert("Question can't be empty 🫠");
+            let questionPrompt = prompt("Almost there! Enter a question 🫠");
+            if (questionPrompt) {
+                questionInput.value = questionPrompt;
+                document.querySelector("[data-submit]").click();
+            }
         }
         document.getElementById("choice").close();
         questionInput.focus();
