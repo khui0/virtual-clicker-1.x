@@ -130,6 +130,12 @@ function appendClick(question, answer) {
     </div>
 </div>` + feed.innerHTML
     addResubmitEvents();
+
+    // Remove no history message
+    let message = document.getElementById("no-history-message");
+    if (message) {
+        message.remove();
+    }
 }
 
 function addResubmitEvents() {

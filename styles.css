@@ -152,6 +152,10 @@ button:hover {
     overflow: hidden
 }
 
+#no-history-message {
+    text-align: center;
+}
+
 dialog {
     width: min(80%, 500px);
     padding: 20px;
