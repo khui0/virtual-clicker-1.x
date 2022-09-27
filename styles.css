@@ -130,9 +130,9 @@ button:hover {
 #feed {
     display: flex;
     flex-direction: column;
+    overflow: auto;
     max-height: 400px;
     border-radius: 8px;
-    overflow: auto;
 }
 
 #feed>div {
@@ -146,10 +146,10 @@ button:hover {
 }
 
 #feed>div>p {
+    overflow: hidden;
     max-width: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden
 }
 
 #no-history-message {
