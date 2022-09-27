@@ -128,7 +128,7 @@ document.getElementById("submit").addEventListener("click", () => {
             questionInput.focus();
         }
         else if (answer?.trim()) {
-            let questionPrompt = prompt("Almost there! Enter a question 🙂");
+            let questionPrompt = prompt("Almost there! Enter a question 🙃");
             if (questionPrompt) {
                 questionInput.value = questionPrompt;
                 document.getElementById("submit").click();
@@ -177,7 +177,7 @@ document.querySelector("[data-submit]").addEventListener("click", e => {
             questionInput.value = "";
         }
         else {
-            let questionPrompt = prompt("Almost there! Enter a question 🫠");
+            let questionPrompt = prompt("Almost there! Enter a question 😅");
             if (questionPrompt) {
                 questionInput.value = questionPrompt;
                 document.querySelector("[data-submit]").click();
