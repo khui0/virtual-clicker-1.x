@@ -23,12 +23,15 @@
             <button data-open="info">Info</button>
         </div>
     </div>
-    <div class="input-container">
+    <div class="dynamic-container">
+        <h2>Submit click</h2>
         <p>Question</p>
         <input type="text">
         <p>Answer</p>
         <textarea name="" id="" rows="10"></textarea>
-        <button>Submit</button>
+        <div class="button-cluster">
+            <button id="submit">Submit</button>
+        </div>
     </div>
     <!-- Dialogs -->
     <dialog id="code">
@@ -53,6 +56,7 @@
         <button data-theme="theme-rose">Rose</button>
         <button data-theme="theme-lavender">Lavender</button>
         <p>Storage</p>
+        <button id="reset-recent">Reset recent clicks</button>
         <button id="reset-theme">Reset theme</button>
         <button id="reset">Reset all</button>
         <div class="button-cluster">

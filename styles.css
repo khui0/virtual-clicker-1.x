@@ -37,6 +37,11 @@ body {
     transition: box-shadow 100ms ease-in-out;
 }
 
+::placeholder {
+    color: var(--text-color);
+    opacity: 0.5;
+}
+
 h1,
 h2,
 h3,
@@ -102,13 +107,13 @@ button:hover {
     height: 3em;
 }
 
-.input-container {
+.dynamic-container {
     width: min(100%, 800px);
     margin: 0 auto;
 }
 
-.input-container>input,
-.input-container>textarea {
+.dynamic-container>input,
+.dynamic-container>textarea {
     background-color: var(--surface-color);
 }
 
@@ -116,6 +121,25 @@ button:hover {
     background-color: transparent;
     font: 500 50px "Poppins", sans-serif;
     text-align: center;
+}
+
+#submit {
+    margin: 0 auto;
+}
+
+.card {
+    flex: 0 0 auto;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: var(--surface-color);
+}
+
+.card>p {
+    max-width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden
 }
 
 dialog {
