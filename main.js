@@ -22,6 +22,7 @@ if (!code) {
     document.getElementById("code").showModal()
 }
 else {
+    document.querySelector("h2").textContent = `Submit click (${code})`;
     document.querySelector("[data-open=code]").textContent = `Change (${code})`;
 }
 
@@ -76,6 +77,7 @@ document.getElementById("save-code").addEventListener("click", () => {
         code = input;
         localStorage.setItem("clicker-code", code);
         document.getElementById("code").close();
+        document.querySelector("h2").textContent = `Submit click (${code})`;
         document.querySelector("[data-open=code]").textContent = `Change (${code})`;
     }
     else {
@@ -128,7 +130,7 @@ document.getElementById("submit").addEventListener("click", () => {
             questionInput.focus();
         }
         else if (answer?.trim()) {
-            let questionPrompt = prompt("Almost there! Enter a question 🙃");
+            let questionPrompt = prompt("Almost there! Enter a question number 🙃");
             if (questionPrompt) {
                 questionInput.value = questionPrompt;
                 document.getElementById("submit").click();
@@ -177,7 +179,7 @@ document.querySelector("[data-submit]").addEventListener("click", e => {
             questionInput.value = "";
         }
         else {
-            let questionPrompt = prompt("Almost there! Enter a question 😅");
+            let questionPrompt = prompt("Almost there! Enter a question number 😅");
             if (questionPrompt) {
                 questionInput.value = questionPrompt;
                 document.querySelector("[data-submit]").click();
