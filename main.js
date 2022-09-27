@@ -15,7 +15,7 @@ if (!code) {
 }
 
 for (let i = 0; i < history.length; i++) {
-    appendClick(history[i].question, history[i].answer);
+    appendClick(history[i].question, history[i].timestamp, history[i].answer);
 }
 
 // Focus the question input for quick answering
@@ -76,9 +76,10 @@ document.getElementById("submit").addEventListener("click", () => {
     let answer = answerInput.value;
     if (code) {
         if (question?.trim() && answer?.trim()) {
+            let timestamp = Date.now();
             submitClick(code, question, answer);
-            appendClick(question, answer);
-            storeClick(question, answer);
+            appendClick(question, timestamp, answer);
+            storeClick(question, timestamp, answer);
             questionInput.value = "";
             answerInput.value = "";
             questionInput.focus();
@@ -134,10 +135,11 @@ function submitClick(code, question, answer) {
     });
 }
 
-function appendClick(question, answer) {
+function appendClick(question, timestamp, answer) {
     let uuid = uuidv4();
     feed.innerHTML = `<div id="${uuid}">
     <h3>${question}</h3>
+    <p>${timeToString(timestamp)}</p>
     <p>${answer}</p>
     <div class="button-cluster">
         <button data-fill="${uuid}">Resubmit</button>
@@ -165,11 +167,35 @@ function addResubmitEvents() {
     });
 }
 
-function storeClick(question, answer) {
+function storeClick(question, timestamp, answer) {
     let item = {
         "question": question,
+        "timestamp": timestamp,
         "answer": answer
     }
     history.push(item);
     localStorage.setItem("clicker-history", JSON.stringify(history));
+}
+
+// Converts unix timestamp into string
+function timeToString(timestamp) {
+    let date = new Date(timestamp);
+    if (timestamp) {
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let period;
+        if (hours > 12) {
+            hours %= 12;
+            period = "PM";
+        }
+        else {
+            period = "AM";
+        }
+        return `${month}/${day} ${hours}:${minutes} ${period}`;
+    }
+    else {
+        return "Timestamp unknown"
+    }
 }
