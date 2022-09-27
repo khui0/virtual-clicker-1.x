@@ -73,7 +73,7 @@ document.getElementById("submit").addEventListener("click", () => {
     let answer = answerInput.value;
     if (code) {
         if (question?.trim() && answer?.trim()) {
-            submitClick(999, question, answer);
+            submitClick(code, question, answer);
             appendClick(question, answer);
             storeClick(question, answer);
             questionInput.value = "";
