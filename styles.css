@@ -69,7 +69,7 @@ textarea {
     border: none;
     border-radius: 8px;
     color: inherit;
-    background-color: var(--control-color);
+    background-color: var(--surface-color);
     font: inherit;
 }
 
@@ -110,11 +110,6 @@ button:hover {
 .dynamic-container {
     width: min(100%, 800px);
     margin: 0 auto;
-}
-
-.dynamic-container>input,
-.dynamic-container>textarea {
-    background-color: var(--surface-color);
 }
 
 #seat-code {
@@ -185,6 +180,11 @@ dialog button:hover {
 
 dialog>.button-cluster {
     justify-content: right;
+}
+
+dialog>input,
+dialog>textarea {
+    background-color: var(--control-color);
 }
 
 .warning {
