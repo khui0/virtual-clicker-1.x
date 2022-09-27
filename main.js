@@ -5,9 +5,9 @@ const answerInput = document.getElementById("answer");
 
 const feed = document.getElementById("feed");
 
-var code = localStorage.getItem("code") || "";
-var history = JSON.parse(localStorage.getItem("history") || "[]");
-document.body.className = localStorage.getItem("theme") || "";
+var code = localStorage.getItem("clicker-code") || "";
+var history = JSON.parse(localStorage.getItem("clicker-history") || "[]");
+document.body.className = localStorage.getItem("clicker-theme") || "";
 
 // Show enter code modal if no saved seat code is found
 if (!code) {
@@ -22,7 +22,7 @@ document.querySelectorAll("[data-theme]").forEach(item => {
     item.addEventListener("click", () => {
         let value = item.getAttribute("data-theme");
         document.body.className = value;
-        localStorage.setItem("theme", value);
+        localStorage.setItem("clicker-theme", value);
     });
 });
 
@@ -60,7 +60,7 @@ document.getElementById("save-code").addEventListener("click", () => {
     // Only allows codes that are possible in room 233
     if (array[0] > 0 && array[1] > 0 && array[2] > 0 && array[0] <= 9 && array[1] <= 6 && array[2] <= 5) {
         code = input;
-        localStorage.setItem("code", code);
+        localStorage.setItem("clicker-code", code);
         document.getElementById("code").close();
     }
     else {
@@ -89,16 +89,18 @@ document.getElementById("submit").addEventListener("click", () => {
 });
 
 document.getElementById("reset-history").addEventListener("click", () => {
-    localStorage.removeItem("history");
+    localStorage.removeItem("clicker-history");
 });
 
 document.getElementById("reset-theme").addEventListener("click", () => {
-    localStorage.removeItem("theme");
+    localStorage.removeItem("clicker-theme");
 });
 
 document.getElementById("reset").addEventListener("click", () => {
     if (confirm("All saved data will be deleted. Would you like to continue?")) {
-        localStorage.clear();
+        localStorage.removeItem("clicker-code");
+        localStorage.removeItem("clicker-history");
+        localStorage.removeItem("clicker-theme");
     }
 });
 
@@ -157,5 +159,5 @@ function storeClick(question, answer) {
         "answer": answer
     }
     history.push(item);
-    localStorage.setItem("history", JSON.stringify(history));
+    localStorage.setItem("clicker-history", JSON.stringify(history));
 }
