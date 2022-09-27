@@ -18,6 +18,9 @@ for (let i = 0; i < history.length; i++) {
     appendClick(history[i].question, history[i].answer);
 }
 
+// Focus the question input for quick answering
+questionInput.focus();
+
 document.querySelectorAll("[data-theme]").forEach(item => {
     item.addEventListener("click", () => {
         let value = item.getAttribute("data-theme");
@@ -78,6 +81,7 @@ document.getElementById("submit").addEventListener("click", () => {
             storeClick(question, answer);
             questionInput.value = "";
             answerInput.value = "";
+            questionInput.focus();
         }
         else {
             alert("Question and answer can't be empty 😔");
