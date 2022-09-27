@@ -138,6 +138,7 @@ document.querySelectorAll("[data-choice]").forEach(button => {
         let choice = button.getAttribute("data-choice");
         let modal = document.getElementById("choice");
         let list = modal.querySelector("ul");
+        let submit = document.querySelector("[data-submit]");
         // Set title to show the selected choice
         modal.querySelector("h2").textContent = `Do you want to submit choice ${choice.toUpperCase()}?`;
         // Populate alias list according to the selected choice
@@ -145,8 +146,9 @@ document.querySelectorAll("[data-choice]").forEach(button => {
         for (let i = 0; i < aliases[choice].length; i++) {
             list.innerHTML += `<li>${aliases[choice][i]}</li>`;
         }
-        document.querySelector("[data-submit]").setAttribute("data-submit", choice);
+        submit.setAttribute("data-submit", choice);
         modal.showModal();
+        submit.focus();
     });
 });
 
