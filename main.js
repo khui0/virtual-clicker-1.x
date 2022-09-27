@@ -21,6 +21,9 @@ const aliases = {
 if (!code) {
     document.getElementById("code").showModal()
 }
+else {
+    document.querySelector("[data-open=code]").textContent = `Change (${code})`;
+}
 
 for (let i = 0; i < history.length; i++) {
     appendClick(history[i].question, history[i].timestamp, history[i].answer);
@@ -73,6 +76,7 @@ document.getElementById("save-code").addEventListener("click", () => {
         code = input;
         localStorage.setItem("clicker-code", code);
         document.getElementById("code").close();
+        document.querySelector("[data-open=code]").textContent = `Change (${code})`;
     }
     else {
         alert("That seat code isn't possible... 🤔");
