@@ -69,6 +69,13 @@ document.getElementById("seat-code").addEventListener("input", e => {
     }
 });
 
+document.getElementById("seat-code").addEventListener("keydown", e => {
+    if (e.key == "Enter") {
+        e.preventDefault();
+        document.getElementById("save-code").click();
+    }
+});
+
 document.getElementById("save-code").addEventListener("click", () => {
     let input = document.getElementById("seat-code").value;
     let array = input.split("");
