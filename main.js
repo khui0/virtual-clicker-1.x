@@ -17,7 +17,7 @@ const aliases = {
 
 // Show enter code modal if no saved seat code is found
 if (!code) {
-    document.getElementById("code").showModal()
+    document.getElementById("code").showModal();
 }
 else {
     document.querySelector("h2").textContent = `Submit click (${code})`;
