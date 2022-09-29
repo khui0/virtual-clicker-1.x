@@ -94,8 +94,14 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    -webkit-user-select: none;
-    user-select: none;
+}
+
+.button-cluster+.button-cluster {
+    margin-top: 5px;
+}
+
+.button-cluster.right {
+    justify-content: right;
 }
 
 .header {
@@ -190,17 +196,12 @@ dialog::backdrop {
 
 .card button,
 dialog button {
-    margin-top: 5px;
     background-color: var(--control-color);
 }
 
 .card button:hover,
 dialog button:hover {
     background-color: var(--accent-color);
-}
-
-dialog>.button-cluster {
-    justify-content: right;
 }
 
 dialog>input,

@@ -55,7 +55,7 @@
         <h2>Enter seat code</h2>
         <input type="text" id="seat-code" placeholder="000" maxlength="3" autocomplete="off">
         <p>period-column-row</p>
-        <div class="button-cluster">
+        <div class="button-cluster right">
             <button data-close="code">Close</button>
             <button id="save-code">Save</button>
         </div>
@@ -64,7 +64,7 @@
         <h2></h2>
         <p>This is the same as submitting</p>
         <ul></ul>
-        <div class="button-cluster">
+        <div class="button-cluster right">
             <button data-close="choice">Close</button>
             <button data-submit>Submit</button>
         </div>
@@ -74,27 +74,33 @@
         <div id="feed">
             <p id="no-history-message">No clicks were found 😥</p>
         </div>
-        <div class="button-cluster">
+        <div class="button-cluster right">
             <button data-close="history">Close</button>
         </div>
     </dialog>
     <dialog id="options">
         <h2>Options</h2>
         <p>Seat code</p>
-        <button data-open="code">Enter</button>
-        <p>Theme</p>
-        <button data-theme="">Classic</button>
-        <button data-theme="theme-abyss">Abyss</button>
-        <button data-theme="theme-glacier">Glacier</button>
-        <button data-theme="theme-sage">Sage</button>
-        <button data-theme="theme-dune">Dune</button>
-        <button data-theme="theme-rose">Rose</button>
-        <button data-theme="theme-lavender">Lavender</button>
-        <p>Storage</p>
-        <button id="reset-history">Reset history</button>
-        <button id="reset-theme">Reset theme</button>
-        <button id="reset">Reset all</button>
         <div class="button-cluster">
+            <button data-open="code">Enter</button>
+        </div>
+        <p>Theme</p>
+        <div class="button-cluster">
+            <button data-theme="">Classic</button>
+            <button data-theme="theme-abyss">Abyss</button>
+            <button data-theme="theme-glacier">Glacier</button>
+            <button data-theme="theme-sage">Sage</button>
+            <button data-theme="theme-dune">Dune</button>
+            <button data-theme="theme-rose">Rose</button>
+            <button data-theme="theme-lavender">Lavender</button>
+        </div>
+        <p>Storage</p>
+        <div class="button-cluster">
+            <button id="reset-history">Reset history</button>
+            <button id="reset-theme">Reset theme</button>
+            <button id="reset">Reset all</button>
+        </div>
+        <div class="button-cluster right">
             <button data-close="options">Close</button>
         </div>
     </dialog>
@@ -103,7 +109,7 @@
         <p>Provides a better UI/UX for submitting clicks in room 233</p>
         <p>Try out <a href="https://khui0.github.io/periodically/" target="_blank">Periodically</a>!</p>
         <p>View the source on <a href="https://github.com/khui0/virtual-clicker" target="_blank">GitHub</a></p>
-        <div class="button-cluster">
+        <div class="button-cluster right">
             <button data-close="info">Close</button>
         </div>
     </dialog>
