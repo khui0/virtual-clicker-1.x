@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "https://jspm.dev/uuid";
-
 const questionInput = document.getElementById("question");
 const answerInput = document.getElementById("answer");
 
@@ -228,7 +226,7 @@ function submitClick(code, question, answer) {
 }
 
 function appendClick(question, timestamp, answer) {
-    let uuid = uuidv4();
+    let uuid = self.crypto.randomUUID();
     feed.innerHTML = `<div id="${uuid}">
     <h3>${question}</h3>
     <p>${timeToString(timestamp)}</p>
