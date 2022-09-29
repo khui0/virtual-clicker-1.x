@@ -66,12 +66,13 @@ input,
 textarea {
     box-sizing: border-box;
     width: 100%;
-    resize: none;
+    margin: 0;
     border: none;
     border-radius: 8px;
     color: inherit;
     background-color: var(--surface-color);
     font: inherit;
+    resize: none;
 }
 
 button {
