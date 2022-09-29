@@ -194,15 +194,17 @@ document.querySelector("[data-submit]").addEventListener("click", e => {
 });
 
 document.getElementById("reset-history").addEventListener("click", () => {
+    alert("History has been reset. Refresh to see changes 🧼");
     localStorage.removeItem("clicker-history");
 });
 
 document.getElementById("reset-theme").addEventListener("click", () => {
+    alert("Theme has been reset. Refresh to see changes 🦋");
     localStorage.removeItem("clicker-theme");
 });
 
 document.getElementById("reset").addEventListener("click", () => {
-    if (confirm("All saved data will be deleted. Would you like to continue?")) {
+    if (confirm("All user data will be deleted. Would you like to continue?")) {
         localStorage.removeItem("clicker-code");
         localStorage.removeItem("clicker-history");
         localStorage.removeItem("clicker-theme");
