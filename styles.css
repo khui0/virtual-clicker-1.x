@@ -171,9 +171,14 @@ button:hover {
     border-top: 2px solid var(--control-color);
 }
 
+#feed>div>h3 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 #feed>div>p {
     overflow: hidden;
-    max-width: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
