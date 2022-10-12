@@ -33,6 +33,30 @@ for (let i = 0; i < history.length; i++) {
 // Focus the question input for quick answering
 questionInput.focus();
 
+// Global keybinds
+document.addEventListener("keydown", e => {
+    if (e.ctrlKey) {
+        // Reference menu shortcut
+        if (e.key == "?") {
+            document.getElementById("keybinds").showModal();
+        }
+        // Submit shortcut
+        else if (e.key == "Enter") {
+            // Only if the body is focused
+            (document.activeElement === document.body) && document.getElementById("submit").click();
+        }
+    }
+    if (e.altKey) {
+        // Math symbol shorcuts
+        let chars = document.querySelectorAll("[data-insert]");
+        let key = parseInt(e.key);
+        if (key > 0 && key <= chars.length) {
+            e.preventDefault();
+            chars[key - 1].click();
+        }
+    }
+});
+
 document.querySelectorAll("[data-theme]").forEach(item => {
     item.addEventListener("click", () => {
         let value = item.getAttribute("data-theme");
@@ -92,13 +116,6 @@ document.getElementById("save-code").addEventListener("click", () => {
     }
 });
 
-// Keybind to submit click
-answerInput.addEventListener("keydown", e => {
-    if (e.ctrlKey && e.key == "Enter") {
-        document.getElementById("submit").click();
-    }
-});
-
 // Hides multiple choice buttons if answer isn't empty
 answerInput.addEventListener("input", () => {
     if (answerInput.value != "") {
@@ -113,19 +130,7 @@ answerInput.addEventListener("input", () => {
     }
 });
 
-// Keybinds to insert math characters
-document.addEventListener("keydown", e => {
-    let chars = document.querySelectorAll("[data-insert]");
-    if (e.altKey) {
-        let key = parseInt(e.key);
-        if (key > 0 && key <= chars.length) {
-            e.preventDefault();
-            chars[key - 1].click();
-        }
-    }
-});
-
-// Math character buttons
+// Math symbol buttons
 document.querySelectorAll("[data-insert]").forEach(button => {
     button.addEventListener("click", () => {
         answerInput.value += button.innerHTML;

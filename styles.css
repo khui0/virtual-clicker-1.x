@@ -224,6 +224,21 @@ dialog>textarea {
     background-color: var(--control-color);
 }
 
+kbd {
+    padding: 0.25em 0.45em;
+    border-radius: 8px;
+    color: var(--text-color);
+    background-color: var(--control-color);
+    font-weight: bold;
+    /* box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25); */
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .warning {
     color: var(--error-color);
 }

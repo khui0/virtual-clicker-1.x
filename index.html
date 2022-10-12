@@ -109,10 +109,22 @@
     <dialog id="info">
         <h2>Info</h2>
         <p>Provides a better UI/UX for submitting clicks in room 233</p>
+        <button data-open="keybinds">View keybinds</button>
         <p>Try out <a href="https://khui0.github.io/periodically/" target="_blank">Periodically</a>!</p>
         <p>View the source on <a href="https://github.com/khui0/virtual-clicker" target="_blank">GitHub</a></p>
         <div class="button-cluster right">
             <button data-close="info">Close</button>
+        </div>
+    </dialog>
+    <dialog id="keybinds">
+        <h2>Keyboard shortcuts</h2>
+        <div class="list">
+            <p><kbd>Ctrl</kbd> + <kbd>?</kbd> Opens this menu</p>
+            <p><kbd>Ctrl</kbd> + <kbd>Enter</kbd> Submits click</p>
+            <p><kbd>Alt</kbd> + <kbd>{n}</kbd> Inserts the nth math symbol</p>
+        </div>
+        <div class="button-cluster right">
+            <button data-close="keybinds">Close</button>
         </div>
     </dialog>
     <!-- Scripts -->
