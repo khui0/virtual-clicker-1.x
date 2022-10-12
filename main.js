@@ -92,7 +92,7 @@ document.getElementById("save-code").addEventListener("click", () => {
     }
 });
 
-// Keyboard shortcut to submit click
+// Keybind to submit click
 answerInput.addEventListener("keydown", e => {
     if (e.ctrlKey && e.key == "Enter") {
         document.getElementById("submit").click();
@@ -110,6 +110,18 @@ answerInput.addEventListener("input", () => {
         document.querySelectorAll("[data-choice]").forEach(button => {
             button.style.display = "inline-block";
         });
+    }
+});
+
+// Keybinds to insert math characters
+document.addEventListener("keydown", e => {
+    let chars = document.querySelectorAll("[data-insert]");
+    if (e.altKey) {
+        let key = parseInt(e.key);
+        if (key > 0 && key <= chars.length) {
+            e.preventDefault();
+            chars[key - 1].click();
+        }
     }
 });
 
