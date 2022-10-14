@@ -42,8 +42,8 @@ document.addEventListener("keydown", e => {
         }
         // Submit shortcut
         else if (e.key == "Enter") {
-            // Only if the body is focused
-            (document.activeElement === document.body) && document.getElementById("submit").click();
+            let anyDialogOpen = Array.from(document.querySelectorAll("dialog")).some(item => item.open);
+            !anyDialogOpen && document.getElementById("submit").click();
         }
     }
     if (e.altKey) {
