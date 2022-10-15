@@ -40,14 +40,22 @@ document.querySelectorAll("[data-insert-keybind]").forEach((item, index) => {
 
 // Global keybinds
 document.addEventListener("keydown", e => {
+    let anyDialogOpen = Array.from(document.querySelectorAll("dialog")).some(item => item.open);
     if (e.ctrlKey) {
-        // Reference menu shortcut
-        if (e.key == "?") {
+        // Open keybind reference
+        if (e.key == "/") {
             document.getElementById("keybinds").showModal();
+        }
+        // Open options menu
+        else if (e.key == ",") {
+            !anyDialogOpen && document.getElementById("options").showModal();
+        }
+        // Open history menu
+        else if (e.key == ".") {
+            !anyDialogOpen && document.getElementById("history").showModal();
         }
         // Submit shortcut
         else if (e.key == "Enter") {
-            let anyDialogOpen = Array.from(document.querySelectorAll("dialog")).some(item => item.open);
             !anyDialogOpen && document.getElementById("submit").click();
         }
     }
