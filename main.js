@@ -268,6 +268,17 @@ function submitClick(code, question, answer) {
 
 function appendClick(question, timestamp, answer) {
     let uuid = uuidv4();
+    let message = document.getElementById("no-history-message");
+
+    if (message) {
+        // Remove no history message
+        message.remove();
+    }
+    else {
+        // Add separator if this is not the first history item
+        feed.innerHTML = "<hr>" + feed.innerHTML;
+    }
+
     feed.innerHTML = `<div id="${uuid}">
     <h3>${question}</h3>
     <p>${timeToString(timestamp)}</p>
@@ -277,12 +288,6 @@ function appendClick(question, timestamp, answer) {
     </div>
 </div>` + feed.innerHTML
     addResubmitEvents();
-
-    // Remove no history message
-    let message = document.getElementById("no-history-message");
-    if (message) {
-        message.remove();
-    }
 }
 
 function addResubmitEvents() {
