@@ -33,6 +33,11 @@ for (let i = 0; i < history.length; i++) {
 // Focus the question input for quick answering
 questionInput.focus();
 
+// Update keybind reference
+document.querySelectorAll("[data-insert-keybind]").forEach((item, index) => {
+    item.querySelector("span").innerHTML = document.querySelectorAll("[data-insert]")[index]?.textContent;
+});
+
 // Global keybinds
 document.addEventListener("keydown", e => {
     if (e.ctrlKey) {
