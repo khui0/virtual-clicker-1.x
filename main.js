@@ -129,6 +129,37 @@ document.getElementById("save-code").addEventListener("click", () => {
     }
 });
 
+// Automatic text replacement
+let undo = "";
+answerInput.addEventListener("input", e => {
+    let replacements = {
+        "sqrt": "√",
+        "inf": "∞",
+        "pi": "π",
+        "theta": "θ"
+    }
+    let exclude = [
+        "deleteContentBackward",
+        "insertFromPaste"
+    ]
+    if (undo && e.inputType == "deleteContentBackward") {
+        e.target.value = undo;
+        undo = "";
+    }
+    else if (!exclude.includes(e.inputType)) {
+        undo = "";
+        for (let i = 0; i < e.target.value.length; i++) {
+            let index = e.target.value.length - (i + 1);
+            let string = e.target.value.substring(index);
+            if (string in replacements) {
+                undo = e.target.value;
+                e.target.value = e.target.value.substring(0, index) + replacements[string];
+                break;
+            }
+        }
+    }
+});
+
 // Hides multiple choice buttons if answer isn't empty
 answerInput.addEventListener("input", () => {
     if (answerInput.value != "") {
