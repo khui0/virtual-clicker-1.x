@@ -143,7 +143,9 @@ answerInput.addEventListener("input", e => {
         "insertFromPaste"
     ]
     if (undo && e.inputType == "deleteContentBackward") {
-        e.target.value = undo;
+        if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart == e.target.value.length) {
+            e.target.value = undo;
+        }
         undo = "";
     }
     else if (!exclude.includes(e.inputType)) {
