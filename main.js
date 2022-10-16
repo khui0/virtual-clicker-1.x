@@ -9,14 +9,6 @@ var code = localStorage.getItem("clicker-code") || "";
 var history = JSON.parse(localStorage.getItem("clicker-history") || "[]");
 document.body.className = localStorage.getItem("clicker-theme") || "";
 
-const aliases = {
-    "a": ["Agree", "True", "Yes"],
-    "b": ["Disagree", "False", "No"],
-    "c": ["Both", "Always"],
-    "d": ["Neither", "Never"],
-    "e": ["Sometimes", "Cannot be determined"]
-}
-
 // Show enter code modal if no saved seat code is found
 if (!code) {
     document.getElementById("code").showModal();
@@ -218,6 +210,13 @@ document.getElementById("submit").addEventListener("click", () => {
 // Show multiple choice preview
 document.querySelectorAll("[data-choice]").forEach(button => {
     button.addEventListener("click", () => {
+        let aliases = {
+            "a": ["Agree", "True", "Yes"],
+            "b": ["Disagree", "False", "No"],
+            "c": ["Both", "Always"],
+            "d": ["Neither", "Never"],
+            "e": ["Sometimes", "Cannot be determined"]
+        }
         let choice = button.getAttribute("data-choice");
         let modal = document.getElementById("choice");
         let list = modal.querySelector("ul");
