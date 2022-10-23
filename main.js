@@ -121,26 +121,31 @@ document.getElementById("save-code").addEventListener("click", () => {
     }
 });
 
-// Automatic text replacement
 let undo = "";
+answerInput.addEventListener("keydown", e => {
+    if (undo && e.key == "Backspace") {
+        if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart == e.target.value.length) {
+            e.preventDefault();
+            e.target.value = undo;
+        }
+        undo = "";
+    }
+});
+
 answerInput.addEventListener("input", e => {
     let replacements = {
         "sqrt": "√",
         "inf": "∞",
         "pi": "π",
-        "theta": "θ"
+        "theta": "θ",
+        "cbrt": "∛",
+        "int": "∫"
     }
     let exclude = [
         "deleteContentBackward",
         "insertFromPaste"
     ]
-    if (undo && e.inputType == "deleteContentBackward") {
-        if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart == e.target.value.length) {
-            e.target.value = undo;
-        }
-        undo = "";
-    }
-    else if (!exclude.includes(e.inputType)) {
+    if (!exclude.includes(e.inputType)) {
         undo = "";
         for (let i = 0; i < e.target.value.length; i++) {
             let index = e.target.value.length - (i + 1);
