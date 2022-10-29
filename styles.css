@@ -106,7 +106,9 @@ button:hover {
     gap: 5px;
 }
 
-.button-cluster+.button-cluster {
+.button-cluster+.button-cluster,
+input+.button-cluster,
+textarea+.button-cluster {
     margin-top: 5px;
 }
 
@@ -130,14 +132,6 @@ button:hover {
     flex-direction: column;
     width: min(100%, 800px);
     margin: 0 auto;
-}
-
-.dynamic-container>.button-cluster {
-    margin: 5px 0;
-}
-
-.dynamic-container>.button-cluster+.button-cluster {
-    margin: 0 0 5px 0;
 }
 
 [data-insert] {
