@@ -11,7 +11,6 @@ const replacements = {
     "and": "∧",
     "subset": "⊂",
     "subseteq": "⊆",
-    "subseteq": "⊆",
 }
 
 let temp = { query: "", index: 0, matches: [] };
