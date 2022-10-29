@@ -134,19 +134,29 @@ answerInput.addEventListener("input", e => {
         "int ": "∫"
     }
 
-    tempString += e.data;
-    let possible = Object.keys(replacements).some(string => string.startsWith(tempString));
+    console.log(`last: ${index} expected: ${index + 1} current: ${e.target.selectionEnd} `);
+    
+    if (e.target.selectionEnd == index + 1 && e.data) {
+        tempString += e.data;
+        index = e.target.selectionEnd;
+    }
+    else {
+        tempString = "";
+        index = e.target.selectionEnd;
+    }
+
+    let matches = tempString.length != 0 ? Object.keys(replacements).filter(string => string.startsWith(tempString)) : [];
 
     if (tempString in replacements) {
         e.target.setRangeText(replacements[tempString], e.target.selectionEnd - tempString.length, e.target.selectionEnd, "end");
         tempString = "";
+        index = e.target.selectionEnd;
     }
-    else if (!possible || e.target.selectionEnd != index + 1) {
+    else if (matches.length == 0) {
         tempString = "";
     }
-    // Index of last input
-    index = e.target.selectionEnd;
-    console.log(e.data);
+
+    console.log(`"${tempString}"`, matches);
 });
 
 // Hides multiple choice buttons if answer isn't empty
