@@ -122,41 +122,56 @@ document.getElementById("save-code").addEventListener("click", () => {
 });
 
 let undo = "";
-answerInput.addEventListener("keydown", e => {
-    if (undo && e.key == "Backspace") {
-        if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart == e.target.value.length) {
-            e.preventDefault();
-            e.target.value = undo;
-        }
-        undo = "";
-    }
-});
+let tempString = "";
+let index = 0;
+let undoIndex = 0;
+
+// answerInput.addEventListener("keydown", e => {
+//     if (undo && e.key == "Backspace") {
+//         if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart == e.target.value.length) {
+//             e.preventDefault();
+//             e.target.value = undo;
+//         }
+//         undo = "";
+//     }
+// });
 
 answerInput.addEventListener("input", e => {
     let replacements = {
-        "sqrt": "√",
-        "inf": "∞",
-        "pi": "π",
-        "theta": "θ",
-        "cbrt": "∛",
-        "int": "∫"
+        "sqrt ": "√",
+        "cbrt ": "∛",
+        "inf ": "∞",
+        "pi ": "π",
+        "theta ": "θ",
+        "int ": "∫"
     }
     let exclude = [
         "deleteContentBackward",
         "insertFromPaste"
     ]
-    if (!exclude.includes(e.inputType)) {
+
+    if (undo && e.inputType == "deleteContentBackward") {
+        if (index == undoIndex) {
+            e.target.setRangeText(undo, index - replacements[undo].length, index, "end");
+        }
         undo = "";
-        for (let i = 0; i < e.target.value.length; i++) {
-            let index = e.target.value.length - (i + 1);
-            let string = e.target.value.substring(index);
-            if (string in replacements) {
-                undo = e.target.value;
-                e.target.value = e.target.value.substring(0, index) + replacements[string];
-                break;
-            }
+    }
+    if (!exclude.includes(e.inputType)) {
+        undo = ""
+        tempString += e.data;
+        let possible = Object.keys(replacements).some(string => string.startsWith(tempString));
+        if (tempString in replacements) {
+            e.target.setRangeText(replacements[tempString], e.target.selectionStart - tempString.length, e.target.selectionEnd, "end");
+            undo = tempString;
+            tempString = "";
+            undoIndex = e.target.selectionStart;
+        }
+        else if (!possible || e.target.selectionStart != index + 1) {
+            tempString = ""
+            console.log(e.target.selectionStart, index);
         }
     }
+    index = e.target.selectionStart;
 });
 
 // Hides multiple choice buttons if answer isn't empty
