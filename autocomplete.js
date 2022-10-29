@@ -11,11 +11,13 @@ const replacements = {
     "and": "∧",
     "subset": "⊂",
     "subseteq": "⊆",
+    "neq": "≠",
+    "sum": "Σ",
 }
 
 let temp = { query: "", index: 0, matches: [] };
 
-// Even though querySelectorAll is used, multiple inputs do not work properly
+// Although querySelectorAll is used, multiple inputs do not work properly
 document.querySelectorAll("[data-autocomplete]").forEach(input => {
     input.addEventListener("keydown", e => {
         if (e.key == "Tab" && e.target.selectionEnd == temp.index && temp.matches.length != 0) {
