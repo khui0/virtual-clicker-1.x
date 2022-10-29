@@ -4,7 +4,14 @@ const replacements = {
     "inf": "∞",
     "pi": "π",
     "theta": "θ",
-    "int": "∫"
+    "int": "∫",
+    "pm": "±",
+    "rightarrow": "→",
+    "or": "∨",
+    "and": "∧",
+    "subset": "⊂",
+    "subseteq": "⊆",
+    "subseteq": "⊆",
 }
 
 let temp = { query: "", index: 0, matches: [] };
