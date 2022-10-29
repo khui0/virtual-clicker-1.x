@@ -121,42 +121,6 @@ document.getElementById("save-code").addEventListener("click", () => {
     }
 });
 
-let temp = { query: "", index: 0 };
-answerInput.addEventListener("input", e => {
-    const replacements = {
-        "sqrt ": "√",
-        "cbrt ": "∛",
-        "inf ": "∞",
-        "pi ": "π",
-        "theta ": "θ",
-        "int ": "∫"
-    }
-
-    console.log(`last: ${temp.index} expected: ${temp.index + 1} current: ${e.target.selectionEnd} `);
-
-    if (e.target.selectionEnd == temp.index + 1 && e.data || temp.query == "") {
-        temp.query += e.data;
-        temp.index = e.target.selectionEnd;
-    }
-    else {
-        temp.query = "";
-        temp.index = e.target.selectionEnd;
-    }
-
-    let matches = temp.query.length != 0 ? Object.keys(replacements).filter(string => string.startsWith(temp.query)) : [];
-
-    if (temp.query in replacements) {
-        e.target.setRangeText(replacements[temp.query], e.target.selectionEnd - temp.query.length, e.target.selectionEnd, "end");
-        temp.query = "";
-        temp.index = e.target.selectionEnd;
-    }
-    else if (matches.length == 0) {
-        temp.query = "";
-    }
-
-    console.log(`"${temp.query}"`, matches);
-});
-
 // Hides multiple choice buttons if answer isn't empty
 answerInput.addEventListener("input", () => {
     if (answerInput.value != "") {
