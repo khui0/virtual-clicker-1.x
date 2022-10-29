@@ -9,6 +9,7 @@ const replacements = {
 
 let temp = { query: "", index: 0, matches: [] };
 
+// Even though querySelectorAll is used, multiple inputs do not work properly
 document.querySelectorAll("[data-autocomplete]").forEach(input => {
     input.addEventListener("keydown", e => {
         if (e.key == "Tab" && e.target.selectionEnd == temp.index && temp.matches.length != 0) {
@@ -17,6 +18,7 @@ document.querySelectorAll("[data-autocomplete]").forEach(input => {
             temp.query = "";
             temp.index = e.target.selectionEnd;
             getMatches();
+            hideMessage(input);
         }
     });
 
@@ -33,14 +35,24 @@ document.querySelectorAll("[data-autocomplete]").forEach(input => {
         getMatches();
 
         if (temp.matches.length != 0) {
-            console.log(`press tab to enter "${temp.matches[0]}"`, temp.matches);
+            showMessage(input, `Press tab to enter "${replacements[temp.matches[0]]}"`)
         }
         else {
             temp.query = "";
+            hideMessage(input);
         }
     });
 });
 
 function getMatches() {
     temp.matches = temp.query.length != 0 ? Object.keys(replacements).filter(string => string.startsWith(temp.query)) : [];
+}
+
+function showMessage(element, message) {
+    !element.nextElementSibling.hasAttribute("data-autocomplete-message") && element.insertAdjacentHTML("afterend", `<p data-autocomplete-message></p>`);
+    element.nextElementSibling.innerHTML = message;
+}
+
+function hideMessage(element) {
+    element.nextElementSibling.hasAttribute("data-autocomplete-message") && element.nextElementSibling.remove();
 }
