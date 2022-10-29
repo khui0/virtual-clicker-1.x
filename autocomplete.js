@@ -13,6 +13,7 @@ const replacements = {
     "subseteq": "⊆",
     "neq": "≠",
     "sum": "Σ",
+    "in": "∈",
 }
 
 let temp = { query: "", index: 0, matches: [] };
@@ -53,7 +54,12 @@ document.querySelectorAll("[data-autocomplete]").forEach(input => {
 });
 
 function getMatches() {
-    temp.matches = temp.query.length != 0 ? Object.keys(replacements).filter(string => string.startsWith(temp.query)) : [];
+    if (temp.query in replacements) {
+        temp.matches = [temp.query];
+    }
+    else {
+        temp.matches = temp.query.length != 0 ? Object.keys(replacements).filter(string => string.startsWith(temp.query)) : [];
+    }
 }
 
 function showMessage(element, message) {
