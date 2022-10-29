@@ -11,17 +11,16 @@ let temp = { query: "", index: 0, matches: [] };
 
 document.querySelectorAll("[data-autocomplete]").forEach(input => {
     input.addEventListener("keydown", e => {
-        if (e.key == "Tab" && temp.matches.length != 0) {
+        if (e.key == "Tab" && e.target.selectionEnd == temp.index && temp.matches.length != 0) {
             e.preventDefault();
             e.target.setRangeText(replacements[temp.matches[0]], e.target.selectionEnd - temp.query.length, e.target.selectionEnd, "end");
             temp.query = "";
             temp.index = e.target.selectionEnd;
+            getMatches();
         }
     });
 
     input.addEventListener("input", e => {
-        console.log(`last: ${temp.index} expected: ${temp.index + 1} current: ${e.target.selectionEnd} `);
-
         if (e.target.selectionEnd == temp.index + 1 && e.data || temp.query == "") {
             temp.query += e.data;
             temp.index = e.target.selectionEnd;
@@ -31,13 +30,17 @@ document.querySelectorAll("[data-autocomplete]").forEach(input => {
             temp.index = e.target.selectionEnd;
         }
 
-        temp.matches = temp.query.length != 0 ? Object.keys(replacements).filter(string => string.startsWith(temp.query)) : [];
+        getMatches();
 
-        if (temp.matches.length == 0) {
-            temp.query = "";
-            console.log("no matches, reset");
+        if (temp.matches.length != 0) {
+            console.log(`press tab to enter "${temp.matches[0]}"`, temp.matches);
         }
-
-        console.log(`"${temp.query}"`, temp.matches);
+        else {
+            temp.query = "";
+        }
     });
 });
+
+function getMatches() {
+    temp.matches = temp.query.length != 0 ? Object.keys(replacements).filter(string => string.startsWith(temp.query)) : [];
+}
