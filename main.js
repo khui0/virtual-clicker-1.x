@@ -121,11 +121,9 @@ document.getElementById("save-code").addEventListener("click", () => {
     }
 });
 
-let tempString = "";
-let index = 0;
-
+let temp = { query: "", index: 0 };
 answerInput.addEventListener("input", e => {
-    let replacements = {
+    const replacements = {
         "sqrt ": "√",
         "cbrt ": "∛",
         "inf ": "∞",
@@ -134,29 +132,29 @@ answerInput.addEventListener("input", e => {
         "int ": "∫"
     }
 
-    console.log(`last: ${index} expected: ${index + 1} current: ${e.target.selectionEnd} `);
-    
-    if (e.target.selectionEnd == index + 1 && e.data) {
-        tempString += e.data;
-        index = e.target.selectionEnd;
+    console.log(`last: ${temp.index} expected: ${temp.index + 1} current: ${e.target.selectionEnd} `);
+
+    if (e.target.selectionEnd == temp.index + 1 && e.data || temp.query == "") {
+        temp.query += e.data;
+        temp.index = e.target.selectionEnd;
     }
     else {
-        tempString = "";
-        index = e.target.selectionEnd;
+        temp.query = "";
+        temp.index = e.target.selectionEnd;
     }
 
-    let matches = tempString.length != 0 ? Object.keys(replacements).filter(string => string.startsWith(tempString)) : [];
+    let matches = temp.query.length != 0 ? Object.keys(replacements).filter(string => string.startsWith(temp.query)) : [];
 
-    if (tempString in replacements) {
-        e.target.setRangeText(replacements[tempString], e.target.selectionEnd - tempString.length, e.target.selectionEnd, "end");
-        tempString = "";
-        index = e.target.selectionEnd;
+    if (temp.query in replacements) {
+        e.target.setRangeText(replacements[temp.query], e.target.selectionEnd - temp.query.length, e.target.selectionEnd, "end");
+        temp.query = "";
+        temp.index = e.target.selectionEnd;
     }
     else if (matches.length == 0) {
-        tempString = "";
+        temp.query = "";
     }
 
-    console.log(`"${tempString}"`, matches);
+    console.log(`"${temp.query}"`, matches);
 });
 
 // Hides multiple choice buttons if answer isn't empty
