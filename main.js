@@ -121,20 +121,8 @@ document.getElementById("save-code").addEventListener("click", () => {
     }
 });
 
-let undo = "";
 let tempString = "";
 let index = 0;
-let undoIndex = 0;
-
-// answerInput.addEventListener("keydown", e => {
-//     if (undo && e.key == "Backspace") {
-//         if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart == e.target.value.length) {
-//             e.preventDefault();
-//             e.target.value = undo;
-//         }
-//         undo = "";
-//     }
-// });
 
 answerInput.addEventListener("input", e => {
     let replacements = {
@@ -145,33 +133,20 @@ answerInput.addEventListener("input", e => {
         "theta ": "θ",
         "int ": "∫"
     }
-    let exclude = [
-        "deleteContentBackward",
-        "insertFromPaste"
-    ]
 
-    if (undo && e.inputType == "deleteContentBackward") {
-        if (index == undoIndex) {
-            e.target.setRangeText(undo, index - replacements[undo].length, index, "end");
-        }
-        undo = "";
+    tempString += e.data;
+    let possible = Object.keys(replacements).some(string => string.startsWith(tempString));
+
+    if (tempString in replacements) {
+        e.target.setRangeText(replacements[tempString], e.target.selectionEnd - tempString.length, e.target.selectionEnd, "end");
+        tempString = "";
     }
-    if (!exclude.includes(e.inputType)) {
-        undo = ""
-        tempString += e.data;
-        let possible = Object.keys(replacements).some(string => string.startsWith(tempString));
-        if (tempString in replacements) {
-            e.target.setRangeText(replacements[tempString], e.target.selectionStart - tempString.length, e.target.selectionEnd, "end");
-            undo = tempString;
-            tempString = "";
-            undoIndex = e.target.selectionStart;
-        }
-        else if (!possible || e.target.selectionStart != index + 1) {
-            tempString = ""
-            console.log(e.target.selectionStart, index);
-        }
+    else if (!possible || e.target.selectionEnd != index + 1) {
+        tempString = "";
     }
-    index = e.target.selectionStart;
+    // Index of last input
+    index = e.target.selectionEnd;
+    console.log(e.data);
 });
 
 // Hides multiple choice buttons if answer isn't empty
