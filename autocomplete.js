@@ -44,7 +44,7 @@ document.querySelectorAll("[data-autocomplete]").forEach(input => {
         getMatches();
 
         if (temp.matches.length != 0) {
-            showMessage(input, `Press tab to enter "${replacements[temp.matches[0]]}"`)
+            showMessage(input, `Press tab to insert "${replacements[temp.matches[0]]}"`)
         }
         else {
             temp.query = "";
