@@ -229,22 +229,29 @@ document.querySelector("[data-submit]").addEventListener("click", e => {
     }
 });
 
-document.getElementById("reset-history").addEventListener("click", () => {
-    alert("History has been reset. Refresh to see changes 🧼");
-    localStorage.removeItem("clicker-history");
-});
-
-document.getElementById("reset-theme").addEventListener("click", () => {
-    alert("Theme has been reset. Refresh to see changes 🦋");
-    localStorage.removeItem("clicker-theme");
-});
-
-document.getElementById("reset").addEventListener("click", () => {
-    if (confirm("All user data will be deleted. Would you like to continue?")) {
-        localStorage.removeItem("clicker-code");
-        localStorage.removeItem("clicker-history");
-        localStorage.removeItem("clicker-theme");
-    }
+document.querySelectorAll("[data-reset]").forEach(button => {
+    button.addEventListener("click", () => {
+        switch (button.getAttribute("data-reset")) {
+            case "history":
+                if (confirm("Would you like to clear history? This cannot be undone.")) {
+                    localStorage.removeItem("clicker-history");
+                    alert("History has been cleared. Refresh to see changes 🗑️");
+                }
+                break;
+            case "theme":
+                localStorage.removeItem("clicker-theme");
+                alert("Theme has been reset. Refresh to see changes 🦋");
+                break;
+            case "all":
+                if (confirm("Would you like to reset all settings and data? This cannot be undone.")) {
+                    localStorage.removeItem("clicker-code");
+                    localStorage.removeItem("clicker-history");
+                    localStorage.removeItem("clicker-theme");
+                    alert("All settings and data have been reset 🧼");
+                }
+                break;
+        }
+    });
 });
 
 function submitClick(code, question, answer) {

@@ -71,11 +71,12 @@
         </div>
     </dialog>
     <dialog id="history">
-        <h2>Click history</h2>
+        <h2>History</h2>
         <div id="feed">
             <p id="no-history-message">History is empty 😥</p>
         </div>
         <div class="button-cluster right">
+            <button data-reset="history">Clear</button>
             <button data-close="history">Close</button>
         </div>
     </dialog>
@@ -103,9 +104,9 @@
         </div>
         <p>Storage</p>
         <div class="button-cluster">
-            <button id="reset-history">Reset history</button>
-            <button id="reset-theme">Reset theme</button>
-            <button id="reset">Reset all</button>
+            <button data-reset="history">Clear history</button>
+            <button data-reset="theme">Reset theme</button>
+            <button data-reset="all">Reset all</button>
         </div>
         <div class="button-cluster right">
             <button data-close="options">Close</button>
