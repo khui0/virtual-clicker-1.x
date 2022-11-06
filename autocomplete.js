@@ -14,6 +14,19 @@ const replacements = {
     "neq": "≠",
     "sum": "Σ",
     "in": "∈",
+    "all": "∀",
+    "some": "∃",
+    "del": "∇",
+    "delta": "∆",
+    "fourthrt": "∜",
+    "angle": "∢",
+    "parallel": "∥",
+    "intersect": "∩",
+    "union": "∪",
+    "therefore": "∴",
+    "composed": "∘",
+    "perpendicular": "⟂",
+    "degrees": "°",
 }
 
 let temp = { query: "", index: 0, matches: [] };
