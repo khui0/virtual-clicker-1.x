@@ -27,6 +27,9 @@ const replacements = {
     "composed": "∘",
     "perpendicular": "⟂",
     "degrees": "°",
+    "infinity": "∞",
+    "radical": "√",
+    "root": "√",
 }
 
 let temp = { query: "", index: 0, matches: [] };
