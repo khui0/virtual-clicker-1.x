@@ -16,6 +16,7 @@ if (!code) {
 else {
     document.querySelector("h2").textContent = `Submit click (${code})`;
     document.querySelector("[data-open=code]").textContent = `Change (${code})`;
+    document.title = `Virtual Clicker (${code})`;
 }
 
 for (let i = 0; i < history.length; i++) {
@@ -107,14 +108,13 @@ document.getElementById("seat-code").addEventListener("keydown", e => {
 
 document.getElementById("save-code").addEventListener("click", () => {
     let input = document.getElementById("seat-code").value;
-    let array = input.split("");
-    // Only allows codes that are possible in room 233
-    if (array[0] > 0 && array[1] > 0 && array[2] > 0 && array[0] <= 9 && array[1] <= 6 && array[2] <= 5) {
+    if (/^[1-9][1-6][1-5]$/.test(input)) {
         code = input;
         localStorage.setItem("clicker-code", code);
         document.getElementById("code").close();
         document.querySelector("h2").textContent = `Submit click (${code})`;
         document.querySelector("[data-open=code]").textContent = `Change (${code})`;
+        document.title = `Virtual Clicker (${code})`;
     }
     else {
         alert("That seat code isn't possible... 🤔");
