@@ -199,7 +199,6 @@ document.querySelectorAll("[data-choice]").forEach(button => {
 document.querySelector("[data-submit]").addEventListener("click", e => {
     let question = questionInput.value;
     let answer = `CHOICE ${e.target.getAttribute("data-submit").toUpperCase()}`;
-    console.log(answer);
     if (code) {
         if (question?.trim()) {
             let timestamp = Date.now();
@@ -285,7 +284,6 @@ function submitClick(code, question, answer) {
 function appendClick(question, timestamp, answer) {
     let uuid = uuidv4();
     let message = document.getElementById("no-history-message");
-
     if (message) {
         // Remove no history message
         message.remove();
@@ -294,7 +292,6 @@ function appendClick(question, timestamp, answer) {
         // Add separator if this is not the first history item
         feed.innerHTML = "<hr>" + feed.innerHTML;
     }
-
     feed.innerHTML = `<div id="${uuid}">
     <h3>${question}</h3>
     <p>${timeToString(timestamp)}</p>
@@ -312,9 +309,15 @@ function addResubmitEvents() {
             let uuid = item.getAttribute("data-fill");
             let question = document.getElementById(uuid).querySelector("h3").textContent;
             let answer = document.getElementById(uuid).querySelectorAll("p")[1].textContent;
-            questionInput.value = question;
-            answerInput.value = answer;
-            answerInput.dispatchEvent(new Event("input"));
+            if (/^CHOICE [A-E]$/.test(answer)) {
+                let choice = answer.split("CHOICE ").pop().toLowerCase();
+                document.querySelector(`[data-choice="${choice}"]`).click();
+            }
+            else {
+                questionInput.value = question;
+                answerInput.value = answer;
+                answerInput.dispatchEvent(new Event("input"));
+            }
             document.getElementById("history").close();
         });
     });
