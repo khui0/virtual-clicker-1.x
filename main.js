@@ -247,6 +247,7 @@ document.querySelectorAll("[data-reset]").forEach(button => {
                     localStorage.removeItem("clicker-code");
                     localStorage.removeItem("clicker-history");
                     localStorage.removeItem("clicker-theme");
+                    localStorage.removeItem("clicker-seen-buttons");
                     alert("All settings and data have been reset 🧼");
                 }
                 break;
@@ -342,3 +343,17 @@ function timeToString(timestamp) {
         return "Timestamp unknown"
     }
 }
+
+// Hide "NEW" tag on buttons after first click
+let seenButtons = JSON.parse(localStorage.getItem("clicker-seen-buttons") || "[]");
+document.querySelectorAll("button[data-new]").forEach(button => {
+    let id = button.getAttribute("data-new");
+    if (seenButtons.includes(id)) {
+        button.removeAttribute("data-new");
+    }
+    button.addEventListener("click", () => {
+        button.removeAttribute("data-new");
+        seenButtons.push(id);
+        localStorage.setItem("clicker-seen-buttons", JSON.stringify(seenButtons));
+    });
+});

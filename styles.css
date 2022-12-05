@@ -5,7 +5,10 @@
     --surface-color: #444c56;
     --control-color: #5e6977;
     --accent-color: #059fff;
+    --accent-text-color: #ffffff;
     --error-color: #f84747;
+    --attention-color: #f84747;
+    --attention-text-color: #ffffff;
 }
 
 html,
@@ -252,4 +255,23 @@ kbd {
 
 .warning {
     color: var(--error-color);
+}
+
+button[data-new] {
+    position: relative;
+}
+
+button[data-new]::after {
+    content: "NEW";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    transform: translate(20%, -20%);
+    padding: 0.2em 0.4em;
+    border-radius: 0.5em;
+    color: var(--attention-text-color);
+    background-color: var(--attention-color);
+    font-size: 0.75rem;
+    pointer-events: none;
 }
