@@ -273,5 +273,6 @@ button[data-new]::after {
     color: var(--attention-text-color);
     background-color: var(--attention-color);
     font-size: 0.75rem;
+    font-weight: 600;
     pointer-events: none;
 }
