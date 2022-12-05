@@ -11,7 +11,7 @@ document.body.className = localStorage.getItem("clicker-theme") || "";
 
 // Show enter code modal if no saved seat code is found
 if (!code) {
-    document.getElementById("code").showModal();
+    showModal("code");
 }
 else {
     document.querySelector("h2").textContent = `Submit click (${code})`;
@@ -37,15 +37,15 @@ document.addEventListener("keydown", e => {
     if (e.ctrlKey) {
         // Open keybind reference
         if (e.key == "/") {
-            document.getElementById("keybinds").showModal();
+            showModal("keybinds");
         }
         // Open options menu
         else if (e.key == ",") {
-            !anyDialogOpen && document.getElementById("options").showModal();
+            !anyDialogOpen && showModal("options");
         }
         // Open history menu
         else if (e.key == ".") {
-            !anyDialogOpen && document.getElementById("history").showModal();
+            !anyDialogOpen && showModal("history");
         }
         // Submit shortcut
         else if (e.key == "Enter") {
@@ -74,13 +74,7 @@ document.querySelectorAll("[data-theme]").forEach(item => {
 document.querySelectorAll("[data-open]").forEach(item => {
     item.addEventListener("click", () => {
         let id = item.getAttribute("data-open");
-        document.getElementById(id).showModal();
-        if (id != "code") {
-            document.getElementById(id).querySelector("button[data-close]").focus();
-        }
-        else {
-            document.getElementById("seat-code").value = code;
-        }
+        showModal(id);
     });
 });
 
@@ -170,7 +164,7 @@ document.getElementById("submit").addEventListener("click", () => {
         }
     }
     else {
-        document.getElementById("code").showModal();
+        showModal("code");
     }
 });
 
@@ -225,7 +219,7 @@ document.querySelector("[data-submit]").addEventListener("click", e => {
         questionInput.focus();
     }
     else {
-        document.getElementById("code").showModal();
+        showModal("code");
     }
 });
 
@@ -254,6 +248,21 @@ document.querySelectorAll("[data-reset]").forEach(button => {
         }
     });
 });
+
+function showModal(id) {
+    const exceptions = {
+        "code": () => {
+            document.getElementById("seat-code").value = code;
+        }
+    }
+    document.getElementById(id).showModal();
+    if (!(id in exceptions)) {
+        document.getElementById(id).querySelector("button[data-close]").focus();
+    }
+    else {
+        exceptions[id]();
+    }
+}
 
 function submitClick(code, question, answer) {
     let fields = {
