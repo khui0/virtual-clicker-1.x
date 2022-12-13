@@ -349,6 +349,9 @@ function timeToString(timestamp) {
         else {
             period = "AM";
         }
+        if (hours == 0) {
+            hours = 12;
+        }
         return `${month}/${day} ${hours}:${minutes} ${period}`;
     }
     else {
