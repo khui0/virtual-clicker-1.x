@@ -342,7 +342,7 @@ function timeToString(timestamp) {
         let hours = date.getHours();
         let minutes = date.getMinutes().toString().padStart(2, "0");
         let period;
-        if (hours > 12) {
+        if (hours >= 12) {
             hours %= 12;
             period = "PM";
         }
