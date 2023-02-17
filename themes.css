@@ -133,8 +133,8 @@ body.theme-winter>dialog::after {
     color-scheme: dark;
     --text-color: #ffffff;
     --background-color: #000000;
-    --surface-color: #050505;
-    --control-color: #050505;
+    --surface-color: #111111;
+    --control-color: #111111;
     --accent-color: #ffffff;
     --accent-text-color: #000000;
     --error-color: #b31225;
@@ -142,11 +142,11 @@ body.theme-winter>dialog::after {
 }
 
 .theme-outcast :is(input, textarea, button, dialog) {
-    border: 2px solid #141414;
+    border: 2px solid #202020;
 }
 
 .theme-outcast dialog {
-    background: repeating-linear-gradient(90deg, #050505 0 25px, #141414 0 50px);
+    background: repeating-linear-gradient(90deg, #050505 0 25px, #1f1f1f 0, #0f0f0f 50px);
     box-shadow: 0 0 20px #050505 inset;
 }
 
